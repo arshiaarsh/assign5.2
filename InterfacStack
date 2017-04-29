@@ -1,0 +1,130 @@
+//Stack Interface//
+
+packagemyPack:
+publicinterface Stack {
+	
+	publicvoidpush(inti);
+	publicintpop();
+
+}
+
+//Fixed Stack Class//
+
+packagemyPack;
+
+publicclassFixedStackimplements Stack{
+	
+	intmaxSize;//Max size
+	int[] stackArray;// Array
+	inttop;//Index of top of the stack
+
+	
+	FixedStack(intmaxSize){
+		this.maxSize=maxSize;
+		stackArray = newint[maxSize];
+		top = -1;
+		
+	}
+
+	@Override
+	publicvoidpush(inti) {
+		System.out.println("Adding element to stack"+i);
+		if(top>= maxSize-1){
+			System.out.println("Stack Overflow");
+		}
+		else {
+			top++;
+			stackArray[top] = i;	
+		}
+	}
+
+	@Override
+	publicintpop() {
+	System.out.println("Removing element from stack");
+	intold_top = top;
+	top--;
+	returnstackArray[old_top];
+	}
+
+}
+
+//Variable Stack Class//
+packagemyPack;
+
+publicclassVariableStackimplementsStack{
+	
+	intstackSize;//Initial size
+	int[] stackArray;// Array
+	inttop;//Index of top of the stack
+
+	VariableStack(intinitialSize){
+		this.stackSize=initialSize;
+		stackArray = newint[initialSize];
+		top=-1;
+		
+	}
+	@Override
+	publicvoidpush(inti) {
+		if(this.isStackFull()){
+System.out.println(("Stack is full. Increasing the capacity."));
+this.increaseStackCapacity();
+        }
+		System.out.println("Adding element to stack"+i);
+		this.stackArray[++top] = i;	
+		
+	}
+	
+	
+privatevoidincreaseStackCapacity(){
+
+int[] newStack = newint[this.stackSize*2];
+for(inti=0;i<stackSize;i++){
+newStack[i] = this.stackArray[i];
+        }
+this.stackArray = newStack;
+this.stackSize = this.stackSize*2;
+    }
+	
+	
+	publicbooleanisStackFull() {
+	return (top == stackSize - 1);
+	    }
+
+	@Override
+	publicintpop() {
+		System.out.println("Removing element from stack");
+		intold_top = top;
+		top--;
+		returnstackArray[old_top];	}
+	
+	}
+	
+
+//Output Program://
+
+packagemyPack;
+
+publicclass Output {
+	
+	
+	publicstaticvoid main(String[] args) {
+		
+		FixedStackfixedStack = newFixedStack(3);
+		fixedStack.push(10);
+		fixedStack.push(20);
+		fixedStack.push(30);
+		fixedStack.push(40);//Stack Overflow
+		System.out.println(fixedStack.pop());
+		
+		VariableStackvariableStack = newVariableStack(3);
+		variableStack.push(10);
+		variableStack.push(20);
+		variableStack.push(30);
+		variableStack.push(40); // Stack full ; increasing capacity
+		System.out.println(variableStack.pop());
+	}
+
+}
+
+
+
